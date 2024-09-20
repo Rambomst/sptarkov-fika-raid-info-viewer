@@ -144,11 +144,11 @@
                         <button type="submit">SAVE CONFIG</button>
                     </td>
                 </tr>
+                <tr>
+                    <td class="required">Make sure your web server has write access to the root directory of this web app.</td>
+                </tr>
             </table>
         </form>
-    </div>
-    <div class="content-box">
-        Make sure your web server has write access to the root directory of this web app.
     </div>
 </body>
 
