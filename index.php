@@ -7,4 +7,3 @@ use Tarkov\Controller\Index;
 
 $controller = new Index();
 $controller->index();
-
