@@ -1,0 +1,12 @@
+{
+    "ui": {
+        "title": "SPTarkov Fika Raid List"
+    },
+    "tarkov": {
+        "host": "1.1.1.1",
+        "port": "6969",
+        "dedicated_clients": [
+            "XXXXX"
+        ]
+    }
+}

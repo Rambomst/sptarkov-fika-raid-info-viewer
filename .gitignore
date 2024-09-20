@@ -1,0 +1,4 @@
+templates_c/
+vendor/
+config.json
+composer.lock

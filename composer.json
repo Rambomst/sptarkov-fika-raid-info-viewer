@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Tarkov\\": "src/"
+        }
+    },
+    "require": {
+        "smarty/smarty": "^5.4"
+    }
+}
