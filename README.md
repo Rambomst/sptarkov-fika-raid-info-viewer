@@ -11,7 +11,7 @@ To get this project up and running, follow these steps:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Rambomst/sptarkov-fika-raid-info-viewer
+git clone https://github.com/Rambomst/sptarkov-fika-raid-info-viewer.git
 cd sptarkov-fika-raid-info-viewer
 ```
 
