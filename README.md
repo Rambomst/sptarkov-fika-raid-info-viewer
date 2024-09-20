@@ -4,6 +4,14 @@ This project is a web interface to display current SPTarkov Fika raids. It uses 
 
 ![Preview of web interface](assets/images/preview.png)
 
+## Requirements
+
+Before deploying the project, ensure you have the following installed:
+
+- **PHP** (version 7.4 or higher recommended)
+- A web server like **Apache** or **Nginx**
+- **Composer** for managing dependencies - [Composer](https://getcomposer.org/)
+
 ## Installation
 
 To get this project up and running, follow these steps:
