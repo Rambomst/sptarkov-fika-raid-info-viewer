@@ -5,6 +5,7 @@
         }
     },
     "require": {
-        "smarty/smarty": "^5.4"
+        "smarty/smarty": "^5.4",
+        "nikic/fast-route": "^1.3"
     }
 }

@@ -2,18 +2,14 @@
 
 namespace Tarkov\Controller;
 
-use Smarty\Smarty;
-use Tarkov\Service\Config;
 use Tarkov\Raid;
 
-class Index {
-    private $view;
-
-    public function __construct() {
-        $this->view = new Smarty();
-        $this->view->setTemplateDir(BASE_DIR . '/tpl');
-        $this->view->assign('config', new Config());
-    }
+class Index extends Base {
+    public static $routes = [
+        'GET' => [
+            '/' => [self::class, 'index']
+        ]
+    ];
 
     public function index() {
         $this->view->assign('raids', Raid::fetchRaids());
