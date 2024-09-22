@@ -16,6 +16,8 @@ class Base {
         $this->config = new Config();
 
         $this->view = new Smarty();
+        $this->view->setCacheDir(sys_get_temp_dir() . '/smarty/cache');
+        $this->view->setCompileDir(sys_get_temp_dir() . '/smarty/compile');
         $this->view->setTemplateDir(BASE_DIR . '/tpl');
         $this->view->assign('config', new Config());
     }
