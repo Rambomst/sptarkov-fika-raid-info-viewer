@@ -19,7 +19,7 @@ class Raid {
         public array $players
     ) {
         // If a dedicated client id appears in the players list then amend the player count, remove it from the players list
-        $dedicated_clients = (new Config())->tarkov['dedicated_clients'];
+        $dedicated_clients = (new Config())->get('tarkov.dedicated_clients');
         foreach ($dedicated_clients as $dedicated_client_id) {
             if (array_key_exists($dedicated_client_id, $this->players)) {
                 // Reduce the player_count by 1
