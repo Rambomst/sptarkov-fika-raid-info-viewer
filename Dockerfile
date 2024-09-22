@@ -20,6 +20,9 @@ WORKDIR /var/www/html
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html
 
+# Set up the smarty temp directory
+RUN mkdir -p /tmp/smarty && chmod -R 777 /tmp/smarty
+
 # Expose port 80
 EXPOSE 80
 
