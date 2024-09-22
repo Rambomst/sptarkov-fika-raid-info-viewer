@@ -1,15 +1,13 @@
 <?php
 namespace Tarkov\Controller;
 
-use Tarkov\Service\Config;
-
 class Setup extends Base {
     public static $routes = [
         'GET' => [
             '/setup' => [self::class, 'setup']
         ],
         'POST' => [
-            '/save_config' => [self::class,'ValidateConfigData']
+            '/setup/save' => [self::class,'saveConfigData']
         ]
     ];
 
@@ -17,9 +15,8 @@ class Setup extends Base {
         $this->view->display('setup.tpl');
     }
 
-    public function ValidateConfigData() {
+    public function saveConfigData() {
         $title      = htmlspecialchars($_POST['title']);
-        
         $host       = $_POST['host'];
         $port       = $_POST['port'];
         

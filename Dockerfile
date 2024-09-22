@@ -17,6 +17,12 @@ COPY . /var/www/html
 # Set the working directory
 WORKDIR /var/www/html
 
+# Recreate config.json if it exists
+RUN [ -f config.json ] && rm config.json; touch config.json
+
+# Set config file permissions
+RUN chmod -R 777 config.json
+
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html
 

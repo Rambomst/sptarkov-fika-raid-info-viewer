@@ -1,37 +1,53 @@
 {include file='common/header.tpl'}
 <section class="section">
-    <div class="container">
-        <div class="card">
-            <span class="title">Set up</span>
-            <div class="card-content columns is-multiline">
-                <form METHOD="POST" ACTION="/save_config">
-                    <table class="table">
-                        <tr>
-                            <th>Server Name</th>
-                            <td><input type="text" name="title" placeholder="server name" value="{$config->ui['title']}"></td>
-                        </tr>
-                        <tr>
-                            <th>Server Host (IP Address or FQDN)</th>
-                            <td><input type="text" name="host" placeholder="server ip or fqdn" value="{$config->tarkov['host']}" required></td>
-                            <td><input type="number" min="1" max="999999" name="port" placeholder="port" value="{$config->tarkov['port']}" required></td>
-                        </tr>
-                        <tr>
-                            <th colspan="3">List of dedicated clients (comma separated)</th>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                <textarea class="textarea" name="dedicated_clients" id="">{foreach $config->tarkov['dedicated_clients'] as $client}{$client}{if !$client@last},{/if}{/foreach}</textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                <button type="submit" class="button">Save config</button>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
+  <div class="container">
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Server Setup
+        </p>
+      </header>
+      <div class="card-content">
+        <form method="POST" action="/setup/save">
+          <div class="field">
+            <label class="label">Server Name</label>
+            <div class="control">
+              <input class="input" type="text" name="title" placeholder="Enter server name" value="{$config->get('ui.title')}">
             </div>
-        </div>
+          </div>
+
+          <div class="field is-horizontal">
+            <div class="field-body">
+              <div class="field">
+                <label class="label">Server Host (IP Address or FQDN)</label>
+                <div class="control">
+                  <input class="input" type="text" name="host" placeholder="Enter server IP or FQDN" value="{$config->get('tarkov.host')}" required>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Port</label>
+                <div class="control">
+                  <input class="input" type="number" min="1" max="999999" name="port" placeholder="Port number" value="{$config->get('tarkov.port')}" required>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Dedicated Clients (comma-separated)</label>
+            <div class="control">
+              <textarea class="textarea" name="dedicated_clients" placeholder="List of dedicated clients">{foreach $config->get('tarkov.dedicated_clients') as $client}{$client}{if !$client@last},{/if}{/foreach}</textarea>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <button type="submit" class="button is-primary">Save Configuration</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </section>
 {include file='common/footer.tpl'}

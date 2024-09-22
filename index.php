@@ -44,15 +44,24 @@ if (false !== $pos = strpos($uri, '?')) {
 $uri = rawurldecode($uri);
 
 $route_info = $dispatcher->dispatch($http_method, $uri);
-switch ($route_info[0]) {
-    case FastRoute\Dispatcher::FOUND:
-        $handler = $route_info[1];
-        $vars = $route_info[2];
-        $controller = new $handler[0];
-        call_user_func([$controller, $handler[1]], $vars);
-        break;
-    default:
-        header("HTTP/1.1 404 Not Found");
-        break;
+
+try {
+    switch ($route_info[0]) {
+        case FastRoute\Dispatcher::FOUND:
+            $handler = $route_info[1];
+            $vars = $route_info[2];
+            $controller = new $handler[0];
+            call_user_func([$controller, $handler[1]], $vars);
+            break;
+        default:
+            header("HTTP/1.1 404 Not Found");
+            break;
+    }
+} catch (\Tarkov\Exception\Config\Invalid $e) {
+    // For config related errors redirect to the config setup page
+    (new \Tarkov\Controller\Setup())->setup();
+} catch (\Exception $e) {
+    // Fallback to generic error page
 }
+
 

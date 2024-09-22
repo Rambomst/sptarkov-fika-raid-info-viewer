@@ -16,7 +16,7 @@ class Config {
         }
     }
 
-    public function __get($name) {
+    public function get($name, $default = null) {
         $keys = explode('.', $name);
         $value = $this->config;
 
@@ -24,23 +24,10 @@ class Config {
             if (isset($value[$key])) {
                 $value = $value[$key];
             } else {
-                return null;
+                return $default;
             }
         }
 
         return $value;
-    }
-
-    public function test_config($host,$port) {
-        if( $host == "" || $port == "" ) { // no config data exists
-            return "Config missing host and/or port value(s)";
-        }
-
-        $waitTimeoutInSeconds = 1; 
-        if($fp = fsockopen($host,$port,$errCode,$errStr,$waitTimeoutInSeconds)){   
-            return true; // no errors, set the error value in config to false
-        } 
-        fclose($fp);
-        return "Unable to connect to server";
     }
 }
