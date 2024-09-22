@@ -36,7 +36,6 @@ class Server {
             if (curl_errno($ch)) {
                 echo 'cURL error: ' . curl_error($ch);
                 curl_close($ch);
-                exit;
             }
 
             $http_status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -45,7 +44,6 @@ class Server {
 
             if ($http_status_code !== 200) {
                 echo "HTTP error! Status: $http_status_code";
-                exit;
             }
 
             $decompressed_data = gzuncompress($response);
@@ -65,7 +63,7 @@ class Server {
 
                 return $data;
             }
-        
+            return [];
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage();
         }
