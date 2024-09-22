@@ -21,5 +21,15 @@ class Base {
         $this->view->setCompileDir(sys_get_temp_dir() . '/smarty/compile');
         $this->view->setTemplateDir(BASE_DIR . '/tpl');
         $this->view->assign('config', new Config());
+        $this->view->assign('error_messages', []);
+    }
+
+    public function getErrorMessages() { return $this->error_messages; }
+
+    public function setErrorMessage($message) {
+        $this->error_messages[] = $message;
+
+        // Update the error_messages array within the view
+        $this->view->assign('error_messages', $this->error_messages);
     }
 }

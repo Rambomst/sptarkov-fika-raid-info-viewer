@@ -16,8 +16,14 @@
         <p class="subtitle">Current Matches</p>
       </div>
     </section>
-    {if false && $config->error}
-      <section class="error">
-        <span class="error-message">{$config->error}</span>
+    {if $error_messages}
+      <section class="section">
+        <div class="notification is-danger">
+          <ul>
+            {foreach $error_messages as $error_message}
+              <li>{$error_message}</li>
+            {/foreach}
+          </ul>
+        </div>
       </section>
     {/if}

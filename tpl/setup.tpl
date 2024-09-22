@@ -27,7 +27,7 @@
               <div class="field">
                 <label class="label">Port</label>
                 <div class="control">
-                  <input class="input" type="number" min="1" max="999999" name="port" placeholder="Port number" value="{$config->get('tarkov.port')}" required>
+                  <input class="input" type="number" min="0" max="65545" name="port" placeholder="Port number" value="{$config->get('tarkov.port')}" required>
                 </div>
               </div>
             </div>

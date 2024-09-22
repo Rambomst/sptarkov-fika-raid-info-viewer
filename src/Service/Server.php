@@ -46,9 +46,10 @@ class Server {
         $response = curl_exec($ch);
 
         if (curl_errno($ch)) {
-            echo 'cURL error: ' . curl_error($ch);
+            $error = curl_error($ch);
             curl_close($ch);
-            exit;
+
+            throw new \Exception('Failed to connect to Fika server. ' . $error);
         }
 
         $http_status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -56,14 +57,13 @@ class Server {
         curl_close($ch);
 
         if ($http_status_code !== 200) {
-            echo "HTTP error! Status: $http_status_code";
-            exit;
+            throw new \Exception('Failed to query the Fika server endpoint. HTTP Status:' . $http_status_code);
         }
 
         $decompressed_data = gzuncompress($response);
 
         if ($decompressed_data === false) {
-            echo 'An error occurred during decompression.';
+            throw new \Exception('An error occurred during decompression.');
         } else {
             $data = json_decode($decompressed_data, true);
             // Handle the case where the response contains "err" key

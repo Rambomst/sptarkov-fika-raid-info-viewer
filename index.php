@@ -1,4 +1,7 @@
 <?php
+
+use Tarkov\Controller\Index;
+
 require 'vendor/autoload.php';
 
 const BASE_DIR = __DIR__;
@@ -61,7 +64,9 @@ try {
     // For config related errors redirect to the config setup page
     (new \Tarkov\Controller\Setup())->setup();
 } catch (\Exception $e) {
-    // Fallback to generic error page
+    $index = new Index();
+    $index->setErrorMessage($e->getMessage());
+    $index->error();
 }
 
 

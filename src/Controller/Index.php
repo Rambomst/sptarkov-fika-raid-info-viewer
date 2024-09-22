@@ -15,4 +15,9 @@ class Index extends Base {
         $this->view->assign('raids', Raid::fetchRaids());
         $this->view->display('index.tpl');
     }
+
+    public function error() {
+        $this->view->assign('error_messages', $this->getErrorMessages());
+        $this->view->display('error.tpl');
+    }
 }
