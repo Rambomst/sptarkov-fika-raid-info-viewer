@@ -1,0 +1,14 @@
+services:
+  web:
+    image: rambomst/sptarkov-fika-raid-info-viewer
+    container_name: fika-raid-info-viewer
+    ports:
+      - 80:80
+    volumes:
+      - .:/var/www/html
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
