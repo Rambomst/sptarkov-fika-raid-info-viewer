@@ -21,7 +21,7 @@ WORKDIR /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 
 # Expose port 80
-EXPOSE 80 9000
+EXPOSE 80
 
 # Start both PHP-FPM and Nginx
 CMD ["bash", "-c", "service nginx start && php-fpm"]
