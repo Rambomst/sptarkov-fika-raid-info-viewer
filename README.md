@@ -19,7 +19,12 @@ The easiest way to get this project running is by using Docker Compose. Follow t
 
 The `docker-compose.yml` file can be found [here](https://github.com/Rambomst/sptarkov-fika-raid-info-viewer/blob/master/docker-compose.yml)
 
-### 2. Start the Application Using Docker
+### 2. Pull Down Latest Docker Image
+```bash
+docker pull rambomst/sptarkov-fika-raid-info-viewer
+```
+
+### 3. Start the Application Using Docker
 
 ```bash
 docker compose up -d --remove-orphans
@@ -44,43 +49,11 @@ The project uses `composer` for managing PHP dependencies. Ensure you have [Comp
 composer install
 ```
 
-### 3. Configure the Project
-
-Create a `config.json` using the `config.example.json` file as a template with the correct values before deploying the project.
-
-```json
-{
-    "ui": {
-        "title": "SPTarkov Fika Match List"
-    },
-    "tarkov": {
-        "host": "1.1.1.1",
-        "port": "6969",
-        "dedicated_clients": [
-            "XXXXX"
-        ]
-    }
-}
-```
-
-#### Configurable Options:
-
-- **ui.title**: Set the title of the web interface (e.g., "SPTarkov Fika Match List").
-- **tarkov.host**: The host IP for the Fika server.
-- **tarkov.port**: The port used by the server.
-- **tarkov.dedicated_clients**: A list of dedicated client IDs which will be excluded from the player list and counts.
-
-You need to replace the `XXXXX` in `dedicated_clients` with actual client IDs for your environment.
-
-### 4. Run the Application
+### 3. Run the Application
 
 Once the configuration is complete, the application is ready to run on your web server.
 
 You can use any PHP server or set up an Apache/Nginx environment to serve the files.
-
-
-
-
 
 ### Configuring the Web Server to Route All Requests Through `index.php`
 
