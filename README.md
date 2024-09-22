@@ -8,7 +8,7 @@ This project is a web interface to display current SPTarkov Fika raids. It uses 
 
 Before deploying the project, ensure you have the following installed:
 
-- **PHP** (version 7.4 or higher recommended)
+- **PHP** (version 8.1 or higher recommended)
 - A web server like **Apache** or **Nginx**
 - **Composer** for managing dependencies - [Composer](https://getcomposer.org/)
 
@@ -63,7 +63,75 @@ You need to replace the `XXXXX` in `dedicated_clients` with actual client IDs fo
 
 Once the configuration is complete, the application is ready to run on your web server.
 
-You can use any PHP server or setup an Apache/Nginx environment to serve the files.
+You can use any PHP server or set up an Apache/Nginx environment to serve the files.
+
+## Configuring the Web Server to Route All Requests Through `index.php`
+
+This project uses FastRoute to handle URL routing, which means all requests should be directed to `index.php`. Below are the instructions for configuring both Apache and Nginx to achieve this.
+
+### Apache Configuration
+
+For Apache, you will need to enable mod_rewrite and update the `.htaccess` file to ensure all requests are routed through `index.php`.
+
+1. Ensure `mod_rewrite` is enabled in Apache:
+   ```bash
+   a2enmod rewrite
+   ```
+
+2. Add or update the `.htaccess` file in the root of your project directory with the following content:
+   ```apache
+   <IfModule mod_rewrite.c>
+       RewriteEngine On
+       RewriteBase /
+
+       # Redirect all requests to index.php
+       RewriteCond %{REQUEST_FILENAME} !-f
+       RewriteCond %{REQUEST_FILENAME} !-d
+       RewriteRule ^ index.php [L]
+   </IfModule>
+   ```
+
+3. Ensure the Apache configuration for your site allows `.htaccess` files:
+   ```apache
+   <Directory /path/to/your/project>
+       AllowOverride All
+   </Directory>
+   ```
+
+### Nginx Configuration
+
+For Nginx, you can configure the server to route all requests to `index.php` by modifying the server block configuration.
+
+1. Open the Nginx configuration file for your site.
+
+2. Update the `location` block to pass all requests that aren't for existing files or directories to `index.php`:
+   ```nginx
+   server {
+       listen 80;
+       server_name your-domain.com;
+       root /path/to/your/project;
+
+       index index.php;
+
+       location / {
+           try_files $uri /index.php$is_args$args;
+       }
+
+       location ~ \.php$ {
+           include snippets/fastcgi-php.conf;
+           fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+           fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+           include fastcgi_params;
+       }
+   }
+   ```
+
+3. Reload Nginx to apply the changes:
+   ```bash
+   sudo systemctl reload nginx
+   ```
+
+After making these changes, all requests to your site will be routed through `index.php`, allowing FastRoute to handle the routing logic.
 
 ## Updating Dependencies
 
